@@ -146,7 +146,10 @@ WScript.Echo("Nome do computador: " + nomepc());
 
 
 //Função 2
-WScript.Echo("Tipo do equipamento: " + tipoeq());
+if (tipoeq())
+	WScript.Echo ("O equipamento eh laptop");
+	else	
+	WScript.Echo ("O equipamento eh desktop");
 
 
 //Função 3
