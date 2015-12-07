@@ -3,10 +3,10 @@
 var nomepc = function (){
 
 	//obtem objeto que representa o servico WMI da máquina
-	var objWMIService = GetObject( "winmgmts://./root/cimv2" )
+	var objWMIService = GetObject( "winmgmts://./root/cimv2" );
 	
 	//obtem a lista de sistemas windows da máquina
-	var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 )
+	var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 );
 	
 	//obtem o iterador da coleçao
 	var colProps = new Enumerator(colItems);
@@ -19,12 +19,12 @@ var nomepc = function (){
 			//obtem um item da coleção
 			p = colProps.item();
 			//extrai o nome do computador do item
-			pcName = p.name
+			pcName = p.name;
 		}
 	
 	//exibe o nome do computador
         WScript.Echo ("Nome do computador:"+nomepc());
-        return pcName;
+        return nomepc;
 }
 
 //--------------------------------------------------------------------------//
