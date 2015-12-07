@@ -86,16 +86,16 @@ return totalMemory;
 
 //Função 5 Serviços rodando na máquina
 
-var Serviços = function ()}{
-var objWMIService = GetObject( "winmgmts://./root/cimv2" )
+var Servicos = function ()}{
+var objWMIService = GetObject( "winmgmts://./root/cimv2" );
 
-var colItems = objWMIService.ExecQuery("Select * from Win32_Service	",null,48)
+var colItems = objWMIService.ExecQuery("Select * from Win32_Service	",null,48);
 var colProps = new Enumerator(colItems);
 var serviceArray = new Array ();
 
 for ( ; !colProps.atEnd(); colProps.moveNext()) { 
 	p = colProps.item();
-	var obj = new Object ()
+	var obj = new Object ();
 	serviceArray.push (p);
 }
 
