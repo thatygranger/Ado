@@ -50,9 +50,9 @@ var tipoeq = function (){
 			WScript.Echo ("O equipamento eh laptop");
 		else
 			WScript.Echo ("O equipamento eh desktop");
-		*/
+		
 		return IsLaptop;
-
+	         */
 }
 
 //--------------------------------------------------------------------------
