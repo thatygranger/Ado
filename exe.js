@@ -86,6 +86,7 @@ return totalMemory;
 
 //Função 5 Serviços rodando na máquina
 
+var Serviços = function ()}{
 var objWMIService = GetObject( "winmgmts://./root/cimv2" )
 
 var colItems = objWMIService.ExecQuery("Select * from Win32_Service	",null,48)
@@ -107,7 +108,7 @@ for (var i = 0; i< serviceArray.length; i+=1) {
 	WScript.Echo  ();
 }
 
-
+}
 
 //--------------------------------------------------------------------------
 //Função 7 serviços iniciados com o S.O
