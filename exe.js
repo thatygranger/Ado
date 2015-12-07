@@ -2,30 +2,30 @@
 
 var nomepc = function (){
 
-//obtem objeto que representa o servico WMI da máquina
-var objWMIService = GetObject( "winmgmts://./root/cimv2" )
-
-//obtem a lista de sistemas windows da máquina
-var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 )
-
-//obtem o iterador da coleçao
-var colProps = new Enumerator(colItems);
-
-//cria variavel que receberá nome do computador
-var pcName;
-
-//itera sobre a coleção de dados retornada do servico WMI
-for ( ; !colProps.atEnd(); colProps.moveNext()) { 
-	//obtem um item da coleção
-	p = colProps.item();
-	//extrai o nome do computador do item
-	pcName = p.name
-}
-
-//exibe o nome do computador
-WScript.Echo ("nome do computador:"+pcName);
-
-return pcName;
+	//obtem objeto que representa o servico WMI da máquina
+	var objWMIService = GetObject( "winmgmts://./root/cimv2" )
+	
+	//obtem a lista de sistemas windows da máquina
+	var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 )
+	
+	//obtem o iterador da coleçao
+	var colProps = new Enumerator(colItems);
+	
+	//cria variavel que receberá nome do computador
+	var pcName;
+	
+	//itera sobre a coleção de dados retornada do servico WMI
+	for ( ; !colProps.atEnd(); colProps.moveNext()) { 
+		//obtem um item da coleção
+		p = colProps.item();
+		//extrai o nome do computador do item
+		pcName = p.name
+	}
+	
+	//exibe o nome do computador
+	WScript.Echo ("nome do computador:"+pcName);
+	
+	return pcName;
 }
 
 //--------------------------------------------------------------------------//
@@ -35,26 +35,26 @@ return pcName;
 
 var tipoeq = function (){
 
-var myComputer = ".";
-
-var objWMIService = GetObject( "winmgmts:\\\\" + myComputer + "\\root\\cimv2" );
-
-var colItems = objWMIService.ExecQuery( "Select * from Win32_Battery" );
-
-var IsLaptop = false;
-
-var objItem = new Enumerator(colItems);
-
-for (;!objItem.atEnd();objItem.moveNext()) {
-	IsLaptop = true;
-}
+	var myComputer = ".";
 	
-if (IsLaptop)
-	WScript.Echo ("eh laptop");
-else
-	WScript.Echo ("eh desktop");
-
-return IsLaptop;
+	var objWMIService = GetObject( "winmgmts:\\\\" + myComputer + "\\root\\cimv2" );
+	
+	var colItems = objWMIService.ExecQuery( "Select * from Win32_Battery" );
+	
+	var IsLaptop = false;
+	
+	var objItem = new Enumerator(colItems);
+	
+	for (;!objItem.atEnd();objItem.moveNext()) {
+		IsLaptop = true;
+	}
+		
+	if (IsLaptop)
+		WScript.Echo ("eh laptop");
+	else
+		WScript.Echo ("eh desktop");
+	
+	return IsLaptop;
 
 }
 
@@ -64,23 +64,23 @@ return IsLaptop;
 
 var qtdmemoria = function (){
 
-var objWMIService = GetObject( "winmgmts://./root/cimv2" )
-var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 )
-var colProps = new Enumerator(colItems);
-var pcName;
-for ( ; !colProps.atEnd(); colProps.moveNext()) { 
-	p = colProps.item();
-	pcName = p.name
-}
-
-var colItems = objWMIService.ExecQuery("Select * from Win32_PhysicalMemory",null,48)
-var colProps = new Enumerator(colItems);
-var totalMemory = 0;;
-for ( ; !colProps.atEnd(); colProps.moveNext()) { 
-	p = colProps.item();
-	totalMemory += ( p.Capacity/1048576 );
-}
-WScript.Echo ("memoria total: "+totalMemory+" mb");
+	var objWMIService = GetObject( "winmgmts://./root/cimv2" )
+	var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 )
+	var colProps = new Enumerator(colItems);
+	var pcName;
+	for ( ; !colProps.atEnd(); colProps.moveNext()) { 
+		p = colProps.item();
+		pcName = p.name
+	}
+	
+	var colItems = objWMIService.ExecQuery("Select * from Win32_PhysicalMemory",null,48)
+	var colProps = new Enumerator(colItems);
+	var totalMemory = 0;;
+	for ( ; !colProps.atEnd(); colProps.moveNext()) { 
+		p = colProps.item();
+		totalMemory += ( p.Capacity/1048576 );
+	}
+	WScript.Echo ("memoria total: "+totalMemory+" mb");
 
 }
 
