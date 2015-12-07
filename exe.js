@@ -170,7 +170,7 @@ if (qtdmemoria() < 4096)
 }
 
 //Função 5 - WinDefend, sppsvc, MpsSvc
-var varservice = servicos()
+var varservice = servicos();
 for (var i = 0; i< varservice.length; i+=1) {
 		var varservice2 = varservice[i];
 	if(varservice2.Name=="WinDefend"){
@@ -187,4 +187,13 @@ for (var i = 0; i< varservice.length; i+=1) {
 		}
 }
 
+//Função 7 Verificar OneDrive
 
+var varprocess = processo();
+for (var i = 0; i< varprocess.length; i+=1) {
+	var varprocess2 = varprocess[i];
+	if(varprocess2.Name=="OneDrive")
+		WScript.Echo("O OneDrive está na lista de inicialização");
+		else
+		WScript.Echo("O OneDrive não está na lista de inicialização");
+}
