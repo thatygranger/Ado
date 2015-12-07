@@ -175,11 +175,11 @@ for (var i = 0; i< serviceArray.length; i+=1) {
 		}
 		if(service.Name=="sppsvc"){
 		if (service.State=="Stopped")
-		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO WINDEFEND NÃO ESTÁ FUNCIONANDO");
+		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO sppsvc NÃO ESTÁ FUNCIONANDO");
 		}
 		if(service.Name=="MpsSvc"){
 		if (service.State=="Stopped")
-		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO WINDEFEND NÃO ESTÁ FUNCIONANDO");
+		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO MpsSvc NÃO ESTÁ FUNCIONANDO");
 		}
 }
 
