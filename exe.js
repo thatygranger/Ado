@@ -175,20 +175,37 @@ for (var i = 0; i< varservice.length; i+=1) {
 		var varservice2 = varservice[i];
 	if(varservice2.Name=="WinDefend"){
 		if (varservice2.State=="Stopped")
-		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO WINDEFEND NÃO ESTÁ FUNCIONANDO");
+		WScript.Echo("ALERTA DE SEGURANÇA! O serviço WINDEFEND não está rodando.");
 		}
 		if(varservice2.Name=="sppsvc"){
 		if (varservice2.State=="Stopped")
-		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO sppsvc NÃO ESTÁ FUNCIONANDO");
+		WScript.Echo("ALERTA DE SEGURANÇA! O serviço sppsvc não está rodando.");
 		}
 		if(varservice2.Name=="MpsSvc"){
 		if (varservice2.State=="Stopped")
-		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO MpsSvc NÃO ESTÁ FUNCIONANDO");
+		WScript.Echo("ALERTA DE SEGURANÇA! O serviço MpsSvc não está rodando.");
 		}
 }
 
 //Função 7 Verificar OneDrive
 
+var varprocess = processo();
+
+
+var i = 0;
+do {
+var varprocess2 = varprocess[i];
+
+if(varprocess2.Name=="OneDrive")
+		WScript.Echo("O OneDrive está na lista de inicialização");
+		else
+		WScript.Echo("O OneDrive não está na lista de inicialização");
+i++;
+} while (varprocess2.Name != "OneDrive");
+
+
+
+/*
 var varprocess = processo();
 for (var i = 0; i< varprocess.length; i+=1) {
 	var varprocess2 = varprocess[i];
@@ -197,3 +214,4 @@ for (var i = 0; i< varprocess.length; i+=1) {
 		else
 		WScript.Echo("O OneDrive não está na lista de inicialização");
 }
+*/
