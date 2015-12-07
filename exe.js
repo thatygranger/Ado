@@ -45,12 +45,12 @@ var tipoeq = function (){
 		for (;!objItem.atEnd();objItem.moveNext()) {
 			IsLaptop = true;
 		}
-			
+		/*	
 		if (IsLaptop)
-			WScript.Echo ("eh laptop");
+			WScript.Echo ("O equipamento eh laptop");
 		else
-			WScript.Echo ("eh desktop");
-		
+			WScript.Echo ("O equipamento eh desktop");
+		*/
 		return IsLaptop;
 
 }
