@@ -25,8 +25,10 @@ var nomepc = function (){
         return nomepc;
 }
 
-	//exibe o nome do computador
-        WScript.Echo ("Nome do computador:"+nomepc());
+//exibe o nome do computador
+WScript.Echo ("Nome do computador:"+nomepc());
+
+
 //--------------------------------------------------------------------------//
 
 //Função 2 - Desktop ou Laptop
