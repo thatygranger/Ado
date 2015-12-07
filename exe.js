@@ -85,7 +85,7 @@ return totalMemory;
 
 //Função 5 Serviços rodando na máquina
 
-var servicos = function ()}{
+var servicos = function (){
 var objWMIService = GetObject( "winmgmts://./root/cimv2" );
 
 var colItems = objWMIService.ExecQuery("Select * from Win32_Service	",null,48);
