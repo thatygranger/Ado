@@ -22,7 +22,7 @@ var nomepc = function (){
 			pcName = p.name;
 		}
 	
-        return nomepc;
+        return pcName;
 }
 
 //exibe o nome do computador
