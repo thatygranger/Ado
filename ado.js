@@ -94,20 +94,6 @@ var getpctype = function (){
 	return IsLaptop;
 }
 
-/*
-        .---.
-       /o   o\
-    __(=  "  =)__
-     //\'-=-'/\\
-        )   (_
-       /      `"=-._
-      /       \     ``"=.
-     /  /   \  \         `=..--.
- ___/  /     \  \___      _,  , `\
-`-----' `""""`'-----``"""`  \  \_/
-                             `-`
-*/
-
 /*-------------------------------------------------------------------------------------------------------------------------------------
 4. Função que retorna a % de uso do HD. Imprimir % de espaço livre. Se espaço livre > 10%, alertar para fazer limpeza de disco.*/
 
@@ -132,11 +118,11 @@ var gethdinfo = function (){
 
 			WScript.Echo("   Unit " + count + ":");
 			WScript.Echo("      Name: " + p.name);
-			WScript.Echo("      Size: " + (p.Size/(1024*1024*1024)).toFixed(2));
+			WScript.Echo("      Size: " + (p.Size/(1024*1024*1024)));
 			//WScript.Echo("      Free space: " + (p.FreeSpace/(1024*1024*1024)).toFixed(2));
-			WScript.Echo("      Usage: " + ((1 - p.FreeSpace/p.Size)*100).toFixed(2)+"%\n");
+			WScript.Echo("      Usage: " + ((1 - p.FreeSpace/p.Size)*100)+"%\n");
 
-			diskunit[arrayguide] = (100 - ((1 - p.FreeSpace/p.Size)*100)).toFixed(2);
+			diskunit[arrayguide] = (100 - ((1 - p.FreeSpace/p.Size)*100));
 
 			count++; 
 			arrayguide++;
