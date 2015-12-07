@@ -83,10 +83,9 @@ return totalMemory;
 
 //--------------------------------------------------------------------------
 
-
 //Função 5 Serviços rodando na máquina
 
-var Servicos = function ()}{
+var servicos = function ()}{
 var objWMIService = GetObject( "winmgmts://./root/cimv2" );
 
 var colItems = objWMIService.ExecQuery("Select * from Win32_Service	",null,48);
@@ -107,7 +106,7 @@ for (var i = 0; i< serviceArray.length; i+=1) {
 	WScript.Echo ("status: "+service.State  );
 	WScript.Echo  ();
 }
-
+return serviceArray;
 }
 
 //--------------------------------------------------------------------------
@@ -167,6 +166,8 @@ if (qtdmemoria() < 4096)
 	else
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
 }
+
+//Função 5
 
 
 
