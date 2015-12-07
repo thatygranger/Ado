@@ -169,8 +169,10 @@ if (qtdmemoria() < 4096)
 
 //Função 5 - WinDefend, sppsvc, MpsSvc
 for (var i = 0; i< serviceArray.length; i+=1) {
-	if(service.Name==" WinDefend"){
-	if  ()
+	if(service.Name=="WinDefend"){
+		if (service.State=="Stopped")
+		WScript.Echo("ALERTA DE SEGURANÇA! O SERVIÇO WINDEFEND NÃO ESTÁ FUNCIONANDO");
+		
 	}
 }
 
