@@ -24,6 +24,7 @@ var nomepc = function (){
 	
 	//exibe o nome do computador
         WScript.Echo ("Nome do computador:"+nomepc());
+        return pcName;
 }
 
 //--------------------------------------------------------------------------//
