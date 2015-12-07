@@ -167,7 +167,7 @@ if (qtdmemoria() < 4096)
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
 }
 
-//Função 5
+//Função 5 - WinDefend, sppsvc, MpsSvc
 
 
 
