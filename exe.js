@@ -160,12 +160,12 @@ if(tipoeq()){
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
 	
 }
-else 
+else {
 if (qtdmemoria() < 4096)
 	WScript.Echo("Equipamento fora das especificações da empresa");
 	else
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
-
+}
 
 
 
