@@ -101,10 +101,10 @@ for ( ; !colProps.atEnd(); colProps.moveNext()) {
 
 for (var i = 0; i< serviceArray.length; i+=1) {
 	var service = serviceArray[i];
-	WScript.Echo ("nome: "+service.Name );
-	WScript.Echo ("nome fantasia: "+service.DisplayName );
-	WScript.Echo ("status: "+service.State  );
-	WScript.Echo  ();
+	//WScript.Echo ("nome: "+service.Name );
+	//WScript.Echo ("nome fantasia: "+service.DisplayName );
+	//WScript.Echo ("status: "+service.State  );
+	//WScript.Echo  ();
 }
 return serviceArray;
 }
@@ -128,7 +128,7 @@ for ( ; !colProps.atEnd(); colProps.moveNext()) {
 
 for (var i = 0; i< processArray.length; i+=1) {
 	var process = processArray[i];
-	WScript.Echo ("nome: "+process.Name );
+	//WScript.Echo ("nome: "+process.Name );
 }
 return processArray;
 }
@@ -168,6 +168,7 @@ if (qtdmemoria() < 4096)
 	else
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
 }
+WScript.Echo("\n");
 
 //Função 5 - WinDefend, sppsvc, MpsSvc
 var varservice = servicos();
@@ -175,7 +176,7 @@ for (var i = 0; i< varservice.length; i+=1) {
 		var varservice2 = varservice[i];
 	if(varservice2.Name=="WinDefend"){
 		if (varservice2.State=="Stopped")
-		WScript.Echo("ALERTA DE SEGURANÇA! O serviço WINDEFEND não está rodando.");
+		WScript.Echo("ALERTA DE SEGURANÇA! O serviço WinDefend não está rodando.");
 		}
 		if(varservice2.Name=="sppsvc"){
 		if (varservice2.State=="Stopped")
@@ -186,32 +187,23 @@ for (var i = 0; i< varservice.length; i+=1) {
 		WScript.Echo("ALERTA DE SEGURANÇA! O serviço MpsSvc não está rodando.");
 		}
 }
+WScript.Echo("\n");
 
 //Função 7 Verificar OneDrive
 
+
 var varprocess = processo();
 
-
-var i = 0;
-do {
-var varprocess2 = varprocess[i];
-
-if(varprocess2.Name=="OneDrive")
-		WScript.Echo("O OneDrive está na lista de inicialização");
-		else
-		WScript.Echo("O OneDrive não está na lista de inicialização");
-i++;
-} while (varprocess2.Name != "OneDrive");
-
-
-
-/*
-var varprocess = processo();
 for (var i = 0; i< varprocess.length; i+=1) {
 	var varprocess2 = varprocess[i];
-	if(varprocess2.Name=="OneDrive")
-		WScript.Echo("O OneDrive está na lista de inicialização");
+	if(varprocess2.Name=="OneDrive"){
+var check = 1;
+break;
+}
+else
+check =0;
+}
+if (check==1)
+WScript.Echo("O OneDrive está na lista de inicialização");
 		else
 		WScript.Echo("O OneDrive não está na lista de inicialização");
-}
-*/
