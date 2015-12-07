@@ -21,7 +21,6 @@ var nomepc = function (){
 			//extrai o nome do computador do item
 			pcName = p.name;
 		}
-	
         return pcName;
 }
 
@@ -51,7 +50,7 @@ var tipoeq = function (){
 		else
 			WScript.Echo ("O equipamento eh desktop");
 	         */		
-		return IsLaptop;
+	return IsLaptop;
 }
 
 //--------------------------------------------------------------------------
