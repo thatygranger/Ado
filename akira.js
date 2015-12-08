@@ -17,7 +17,8 @@ var printit = function (a, b, c){
 		WScript.Stdout.Write (a);
 		c--;	
 
-		d = b;
+		var d = b;
+		
 		if (d == 0)
 			null;
 		else {
@@ -68,8 +69,9 @@ var getpcname = function (){
 
 var getpctype = function (){
 
+	var myComputer = ".";
 	//gets the object that represents the WMI service of the machine
-	var objWMIService = GetObject ("winmgmts://./root/cimv2");
+	var objWMIService = GetObject ( "winmgmts:\\\\" + myComputer + "\\root\\cimv2" );
 
 	//getss battery status
 	var colItems = objWMIService.ExecQuery ("Select * from Win32_Battery");
@@ -84,15 +86,31 @@ var getpctype = function (){
 		for (; !objItem.atEnd(); objItem.moveNext()) {
 			IsLaptop = true;
 		}
-			
-		//function return string (Laptop or Desktop)
+/*	
+		//function set string (Laptop or Desktop)
 		if (IsLaptop)
 			IsLaptop = "Laptop";
 		else
 			IsLaptop = "Desktop";
+*/
 
 	return IsLaptop;
 }
+
+/*
+        .---.
+       /o   o\
+    __(=  "  =)__
+     //\'-=-'/\\
+        )   (_
+       /      `"=-._
+      /       \     ``"=.
+     /  /   \  \         `=..--.
+ ___/  /     \  \___      _,  , `\
+`-----' `""""`'-----``"""`  \  \_/
+                             `-`                            
+FOCA NO CÓDIGO
+*/
 
 /*-------------------------------------------------------------------------------------------------------------------------------------
 4. Função que retorna a % de uso do HD. Imprimir % de espaço livre. Se espaço livre > 10%, alertar para fazer limpeza de disco.*/
@@ -111,23 +129,34 @@ var gethdinfo = function (){
 		WScript.Echo ("\n\nStorage:");
 
 		//iterates the data of each storage unit, returning the usage status
-		var diskunit = new Array (); var arrayguide = 0; //disk cleanup warning variables
+		var diskunit = []; var arrayguide = 0; //this variable stores each unity free space %
 		for (var count = 1; !colProps.atEnd(); colProps.moveNext()) {
 
 			p = colProps.item();
 
+			//prints unity list number
 			WScript.Echo("   Unit " + count + ":");
+
+			//prints unity letter
 			WScript.Echo("      Name: " + p.name);
-			WScript.Echo("      Size: " + (p.Size/(1024*1024*1024)));
+
+			//prints unity total size
+			WScript.Echo("      Size: " + (p.Size/(1024*1024*1024)).toFixed(2));
+
+			//prints unity free space
 			//WScript.Echo("      Free space: " + (p.FreeSpace/(1024*1024*1024)).toFixed(2));
-			WScript.Echo("      Usage: " + ((1 - p.FreeSpace/p.Size)*100)+"%\n");
 
-			diskunit[arrayguide] = (100 - ((1 - p.FreeSpace/p.Size)*100));
+			//prints disk usage %
+			WScript.Echo("      Usage: " + ((1 - p.FreeSpace/p.Size)*100).toFixed(2)+"%\n");
 
-			count++; 
-			arrayguide++;
-		}	
+			//storing the current unity free space %
+			diskunit[arrayguide] = (100 - ((1 - p.FreeSpace/p.Size)*100)).toFixed(2);
 
+			count++; //just a display count to list the storage units (display list starts from 1)
+			arrayguide++; //counter to 'diskunit' variable (starts from 0)
+		}
+
+	//returns array with free space of each unity
 	return diskunit;
 }
 
@@ -147,7 +176,7 @@ var getpcservices = function (){
 	var colProps = new Enumerator(colItems);
 
 	//creating the array to store the service list
-	var serviceArray = new Array ();
+	var serviceArray = [];
 
 		//storing the service list in the array
 		for (; !colProps.atEnd(); colProps.moveNext()) { 
@@ -157,10 +186,10 @@ var getpcservices = function (){
 			serviceArray.push (p);
 		}
 
+/*
 		WScript.Echo ("\n\nServices:");
 
 		//lists the services in the array
-		var checkservice = new Array (); var count = 0; //variables to verify the specified services
 		for (var i = 0; i < serviceArray.length; i+=1) {
 
 			var service = serviceArray[i];
@@ -168,47 +197,9 @@ var getpcservices = function (){
 				WScript.Echo("   Name: " + service.Name);
 				WScript.Echo("      Display name: " + service.DisplayName);
 				WScript.Echo("      Status: " + service.State + "\n");
+*/
 
-					//verify if 'WinDefend' is running
-					if (service.Name == "MpsSvc"){
-
-						//printit("^^^^^^^^^^^^^^^^^",10,2); //mark the service on the list
-
-						if (service.State == "Running")
-							checkservice[count] = 1; //running == 1, array [0]
-						else 
-							checkservice[count] = 0; //stopped == 0, array [0]
-
-						count++;
-					}
-
-					//verify if 'sppsvc' is running
-					if (service.Name == "sppsvc"){
-
-						//printit("^^^^^^^^^^^^^^^^^",10,3); //mark the service on the list
-
-						if (service.State == "Running")
-							checkservice[count] = 1; //running == 1, array [1]
-						else 
-							checkservice[count] = 0; //stopped == 0, array [1]
-						
-						count++;
-					}
-					//verify if 'MpsSvc' is running		
-					if (service.Name == "WinDefend"){
-
-						//printit("^^^^^^^^^^^^^^^^^",10,2); //mark the service on the list
-
-						if (service.State == "Running")
-							checkservice[count] = 1; //running == 1, array [1]
-						else 
-							checkservice[count] = 0; //stopped == 0, array [1]
-						
-						count++;
-					}
-		}
-
-	return checkservice;
+	return serviceArray;
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------
@@ -224,7 +215,7 @@ var startuptasks = function (){
 
 	//gets the item iterator and creating the array to store the task list
 	var colProps = new Enumerator(colItems);
-	var processArray = new Array ();
+	var processArray = [];
 
 		//storing the task list in the array
 		for ( ; !colProps.atEnd(); colProps.moveNext()) { 
@@ -232,20 +223,17 @@ var startuptasks = function (){
 			var obj = new Object ()
 			processArray.push (p);
 		}
-
+/*
 		WScript.Echo ("\n\nStartup Tasks:");
+
 		//lists the services in the array
-		var checkonedrive = 0;
 		for (var i = 0; i< processArray.length; i+=1) {
 			var process = processArray[i];
 			WScript.Echo ("   Name: "+process.Name );
-
-			//verify if 'OneDrive' task is in the startup list 		
-			if (process.Name == "WinDefend"){
-				checkonedrive = 1;
-			}
 		}
-	return checkonedrive;
+*/
+
+	return processArray;
 }
 
 //END OF FUNCTIONS
@@ -253,7 +241,6 @@ var startuptasks = function (){
 //-------------------------------------------------------------------------------------------------------------------------------------
 
 //BEGINNING OF THE REPORT
-
 
 printit("-",0, 50);printit("\n");
 printit("Computer maintenance report.",2);
@@ -263,7 +250,10 @@ printit("-",0, 50);printit("\n");
 printit("Name: " + getpcname());
 
 //2. prints the computer type (desktop or laptop)
-printit("Type: " + getpctype());
+if(getpctype())
+	printit("Type: Laptop")
+else
+	printit("Type: Desktop")
 
 //4. prints warning if disk space is below 10%
 var checkspace = gethdinfo();
@@ -282,32 +272,61 @@ var checkspace = gethdinfo();
 		arrayguide++;
 	}
 
-//5. prints if services are running
+//5. prints if services are running (WinDefend, sppsvc, MpsSvc)
 
-var checkservices = getpcservices();
-var thoseservices = new Array("MpsSvc", "sppsvc", "WinDefend");
+printit("\nService check:");
+var getpcservices2 = getpcservices();
 
-	printit(); printit("!",0,62); printit("\n");
+	//loop for verify the services
+	for(var count = 0;count < getpcservices2.length; count++){
 
-	//verify if MpsSvc, sppsvc and WinDefend are up or down
-	for (count = 0; count <= checkservices.length; count ++){
-		if (checkservices[count] == 0)
-			printit("      SECURITY WARNING: Service '" + thoseservices[count] + "' is disabled."); //this warning will be printed at the end of the service list
+		var checkservices = getpcservices2[count];
+		//verify if MpsSvc is running
+		if (checkservices.Name == "MpsSvc"){
+			if (checkservices.State == "Stopped")
+				printit("   !!!!!!!SECURITY WARNING: The service MpsSvc isn't running!!!!!!!")
+		}
+
+		//verify if sppsvc is running
+		if (checkservices.Name == "sppsvc"){
+			if (checkservices.State == "Stopped")
+				printit("   !!!!!!!SECURITY WARNING: The service sppsvc isn't running!!!!!!!")
+		}
+
+		//verify if WinDefend is running
+		if (checkservices.Name == "WinDefend"){
+			if (checkservices.State == "Stopped")
+				printit("   !!!!!!!SECURITY WARNING: The service WinDefend isn't running!!!!!!!")
+		}
 	}
 
-	printit(); printit("!",0,62); printit("\n");
-
 //7. prints startup task schedule
-var checkonedrivestartup = startuptasks();
-	//check if OneDrive is on the list
-	if (checkonedrivestartup == 1)
-		printit("\nOneDrive is in the startup list and will start automatically after logon.",3);
-	else
-		printit("\nOne drive isn't in the startup list.",3);
+printit("\nStartup process check:");
+var startuptasks2 = startuptasks();
+	for(var count = 0;count < startuptasks2.length; count++){
 
+		var onedrivetrue; 
+		var checkprocess = startuptasks2[count];
+
+		//verify if OneDrive is in the startup list (set onedrivetrue to 1) or not on the list (set to 0)
+		if (checkprocess.Name == "OneDrive"){
+			onedrivetrue = 1;
+			break;
+		}
+		else
+			onedrivetrue = 0;
+	}
+
+	if (onedrivetrue == 1)
+		printit("   OneDrive is in the startup list.",2);
+	else
+		printit("   OneDrive isn't in the startup list.",2);
 
 printit("-",0, 50);printit("\n");
 printit("End of maintenance report.",2);
 printit("-",0, 50);printit("\n");
+
+
+//END OF THE REPORT
 
 printit("Ricardo Akira Paiva Ichikawa\n2o Semestre de Redes de Computadores\nADO Final de Algoritmos de Programa\u00e7\u00e3o\nProfessor F\u00e1bio de Toledo Pereira",3);
