@@ -159,13 +159,13 @@ if (tipoeq())
 //Função 3
 //Recebe o resultado da função tipoeq verifica se é verdadeira (Laptop) ou Falsa (Desktop)
 if(tipoeq()){
-//Se o resultado for verdadeiro ele verifica se a quantidade de memoria está de acordo com as especificações
+//Se leptop: verifica quantidade de memomoria (mínimo 2Gb)
 	if (qtdmemoria() < 2048)
 	WScript.Echo("Equipamento fora das especificações da empresa");
 	else
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
 }
-//Se o resultado for falso ele verifica se a quantidade de memoria está de acordo com as especificações
+//Se desktop: verifica quantidade de memomoria (mínimo 2Gb)
 else {
 if (qtdmemoria() < 4096)
 	WScript.Echo("Equipamento fora das especificações da empresa");
