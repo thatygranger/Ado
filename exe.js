@@ -176,13 +176,13 @@ WScript.Echo("\n");
 
 
 //Função 5 - WinDefend, sppsvc, MpsSvc
-//variavel está recebendo a função
+//variavel está recebendo a array da função
 var varservice = servicos();
 
-//o laço de repetição está listando os valores da função
+//o laço de repetição está lendo o array em busca dos serviços
 for (var i = 0; i< varservice.length; i+=1) {
 		var varservice2 = varservice[i];
-//Verifica se os serviços estão na lista e caso ele não esteja informa ao usuário
+//Caso os serviços WinDefend, sppsvc, MpsSvc não estejam ativos informa ao usuário
 	if(varservice2.Name=="WinDefend"){
 		if (varservice2.State=="Stopped")
 		WScript.Echo("ALERTA DE SEGURANÇA! O serviço WinDefend não está rodando.");
@@ -197,19 +197,15 @@ for (var i = 0; i< varservice.length; i+=1) {
 		}
 }
 WScript.Echo("\n");
-//Função 7 Verificar OneDrive
 
+//Função 7 Verificar OneDrive
 //variavel está recebendo a função
 var varprocess = processo();
-
-
 //o laço de repetição está listando os valores da função
 for (var i = 0; i< varprocess.length; i+=1) {
 	var varprocess2 = varprocess[i];
-
 //Caso a verificação seja verdadeira (check=1) o laço informa que o processo está na lista.
 //Caso a verificação seja falsa (check=2) o laço informa que o processo não está na lista.
-
 	if(varprocess2.Name=="OneDrive"){
 var check = 1;
 break;
