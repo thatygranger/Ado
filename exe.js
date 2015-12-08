@@ -136,7 +136,7 @@ return processArray;
 
 //--------------------------------------------------------------------------\\
 
-
+//Início do relatório
 
 WScript.Echo("\n");
 WScript.Echo("Relatório de Manutenção");
@@ -144,12 +144,12 @@ WScript.Echo("\n");
 
 
 //Função 1
-//Recebe o nome do computador
+//Imprime o nome do computador
 WScript.Echo("Nome do computador: " + nomepc());
 
 
 //Função 2
-//Recebe o resutado da função tipoeq e verifica se o IsLaptop é verdadeiro para rodar a condição
+//Recebe o resutado da função tipoeq e verifica se o IsLaptop é verdadeiro ou falso para rodar a condição
 if (tipoeq())
 	WScript.Echo ("O equipamento eh laptop");
 	else	
@@ -157,19 +157,14 @@ if (tipoeq())
 
 
 //Função 3
-//Recebe o resultado da função tipoeq verifica se é verdadeira
+//Recebe o resultado da função tipoeq verifica se é verdadeira (Laptop) ou Falsa (Desktop)
 if(tipoeq()){
-
-
 //Se o resultado for verdadeiro ele verifica se a quantidade de memoria está de acordo com as especificações
 	if (qtdmemoria() < 2048)
 	WScript.Echo("Equipamento fora das especificações da empresa");
 	else
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
-	
 }
-
-
 //Se o resultado for falso ele verifica se a quantidade de memoria está de acordo com as especificações
 else {
 if (qtdmemoria() < 4096)
@@ -180,39 +175,28 @@ if (qtdmemoria() < 4096)
 WScript.Echo("\n");
 
 
-
 //Função 5 - WinDefend, sppsvc, MpsSvc
-
 //variavel está recebendo a função
 var varservice = servicos();
 
 //o laço de repetição está listando os valores da função
 for (var i = 0; i< varservice.length; i+=1) {
 		var varservice2 = varservice[i];
-
 //Verifica se os serviços estão na lista e caso ele não esteja informa ao usuário
-
 	if(varservice2.Name=="WinDefend"){
 		if (varservice2.State=="Stopped")
 		WScript.Echo("ALERTA DE SEGURANÇA! O serviço WinDefend não está rodando.");
 		}
-
 		if(varservice2.Name=="sppsvc"){
 		if (varservice2.State=="Stopped")
 		WScript.Echo("ALERTA DE SEGURANÇA! O serviço sppsvc não está rodando.");
 		}
-
-
 		if(varservice2.Name=="MpsSvc"){
 		if (varservice2.State=="Stopped")
 		WScript.Echo("ALERTA DE SEGURANÇA! O serviço MpsSvc não está rodando.");
 		}
 }
 WScript.Echo("\n");
-
-
-
-
 //Função 7 Verificar OneDrive
 
 //variavel está recebendo a função
