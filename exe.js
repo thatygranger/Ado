@@ -201,11 +201,10 @@ WScript.Echo("\n");
 //Função 7 Verificar OneDrive
 //variavel está recebendo a função
 var varprocess = processo();
-//o laço de repetição está listando os valores da função
+//o laço de repetição está lendo o array em busca do processo
 for (var i = 0; i< varprocess.length; i+=1) {
 	var varprocess2 = varprocess[i];
-//Caso a verificação seja verdadeira (check=1) o laço informa que o processo está na lista.
-//Caso a verificação seja falsa (check=2) o laço informa que o processo não está na lista.
+	//Caso o OneDrive for encontrado na lista check=1, caso não seja encontrado check=0
 	if(varprocess2.Name=="OneDrive"){
 var check = 1;
 break;
@@ -217,3 +216,5 @@ if (check==1)
 WScript.Echo("O OneDrive está na lista de inicialização");
 		else
 		WScript.Echo("O OneDrive não está na lista de inicialização");
+//Caso a verificação seja verdadeira (check=1) o laço informa que o processo está na lista.
+//Caso a verificação seja falsa (check=0) o laço informa que o processo não está na lista.
