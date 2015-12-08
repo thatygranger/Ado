@@ -149,7 +149,7 @@ WScript.Echo("Nome do computador: " + nomepc());
 
 
 //Função 2
-//Recebe o resutado da função tipoeq e verifica se o IsLaptop é verdadeiro ou falso para rodar a condição
+//Recebe o resultado da função tipoeq verifica se é verdadeira (Laptop) ou Falsa (Desktop)
 if (tipoeq())
 	WScript.Echo ("O equipamento eh laptop");
 	else	
@@ -165,7 +165,7 @@ if(tipoeq()){
 	else
 	WScript.Echo("Equipamento de acordo com as especificações da empresa");
 }
-//Se desktop: verifica quantidade de memomoria (mínimo 2Gb)
+//Se desktop: verifica quantidade de memomoria (mínimo 4Gb)
 else {
 if (qtdmemoria() < 4096)
 	WScript.Echo("Equipamento fora das especificações da empresa");
@@ -204,7 +204,7 @@ var varprocess = processo();
 //o laço de repetição está lendo o array em busca do processo
 for (var i = 0; i< varprocess.length; i+=1) {
 	var varprocess2 = varprocess[i];
-	//Caso o OneDrive for encontrado na lista check=1, caso não seja encontrado check=0
+	//Caso o OneDrive seja  encontrado na lista check=1, caso não seja encontrado check=0
 	if(varprocess2.Name=="OneDrive"){
 var check = 1;
 break;
@@ -212,9 +212,10 @@ break;
 else
 check =0;
 }
+//Caso a verificação seja verdadeira (check=1) o laço informa que o processo está na lista.
+//Caso a verificação seja falsa (check=0) o laço informa que o processo não está na lista.
 if (check==1)
 WScript.Echo("O OneDrive está na lista de inicialização");
 		else
 		WScript.Echo("O OneDrive não está na lista de inicialização");
-//Caso a verificação seja verdadeira (check=1) o laço informa que o processo está na lista.
-//Caso a verificação seja falsa (check=0) o laço informa que o processo não está na lista.
+
