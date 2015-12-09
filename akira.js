@@ -6,6 +6,8 @@ Ricardo Akira Paiva Ichikawa
 ADO Final de Algoritmos de Programação
 Professor Fábio de Toledo Pereira
 
+Grupo 15 - 	0, 1, 2, 4, 5, 7
+
 ----------------------------------------------------------------------------------------------------------------------------
 
 Função abaixo não está relacionada ao trabalho.
@@ -15,10 +17,8 @@ Padrão: 1x Echo (string + \n) */
 var printit = function (a, b, c){
 	do {
 		WScript.Stdout.Write (a);
-		c--;	
 
 		var d = b;
-		
 		if (d == 0)
 			null;
 		else {
@@ -27,6 +27,8 @@ var printit = function (a, b, c){
 				d--;
 			} while (d > 0);
 		}
+
+		c--;	
 	} while (c > 0);
 }
 
@@ -41,13 +43,13 @@ var printit = function (a, b, c){
 
 var getpcname = function (){
 
-	//getss the object that represents the WMI service of the machine
+	//gets the object that represents the WMI service of the machine
 	var objWMIService = GetObject ("winmgmts://./root/cimv2");
 
-	//getss the list of windows systems in the machine
+	//gets the list of windows systems in the machine
 	var colItems = objWMIService.ExecQuery ("Select * from Win32_ComputerSystem",null ,48);
 
-	//getss the colection iterator
+	//gets the colection iterator
 	var colProps = new Enumerator (colItems);
 
 	//creates a variable that will receive the computer name
@@ -55,7 +57,7 @@ var getpcname = function (){
 
 		//iterates the colection of data from WMI service
 		for ( ; !colProps.atEnd(); colProps.moveNext()) { 
-			//getss a item from the colection
+			//gets a item from the colection
 			p = colProps.item();
 			//extract the computer name from the item
 			pcName = p.name;
@@ -73,7 +75,7 @@ var getpctype = function (){
 	//gets the object that represents the WMI service of the machine
 	var objWMIService = GetObject ( "winmgmts:\\\\" + myComputer + "\\root\\cimv2" );
 
-	//getss battery status
+	//gets battery status
 	var colItems = objWMIService.ExecQuery ("Select * from Win32_Battery");
 
 	//sets the machine as desktop. If there is no alteration after the iteraction, the answer will be "Desktop"
@@ -120,18 +122,17 @@ var gethdinfo = function (){
 	//gets the object that represents the WMI service of the machine
 	var objWMIService = GetObject ("winmgmts://./root/cimv2");
 
-	//getss status of non-removable storage units
+	//gets status of non-removable storage units
 	var colItems = objWMIService.ExecQuery ("Select * from Win32_LogicalDisk where DriveType=3", null, 48);
 
 	//gets the item iterator
 	var colProps = new Enumerator (colItems);
 
-		WScript.Echo ("\n\nStorage:");
+	WScript.Echo ("\n\nStorage:");
 
 		//iterates the data of each storage unit, returning the usage status
 		var diskunit = []; var arrayguide = 0; //this variable stores each unity free space %
 		for (var count = 1; !colProps.atEnd(); colProps.moveNext()) {
-
 			p = colProps.item();
 
 			//prints unity list number
@@ -180,7 +181,6 @@ var getpcservices = function (){
 
 		//storing the service list in the array
 		for (; !colProps.atEnd(); colProps.moveNext()) { 
-
 			p = colProps.item();
 			var obj = new Object ();
 			serviceArray.push (p);
@@ -279,20 +279,18 @@ var getpcservices2 = getpcservices();
 
 	//loop for verify the services
 	for(var count = 0;count < getpcservices2.length; count++){
-
 		var checkservices = getpcservices2[count];
+
 		//verify if MpsSvc is running
 		if (checkservices.Name == "MpsSvc"){
 			if (checkservices.State == "Stopped")
 				printit("   !!!!!!!SECURITY WARNING: The service MpsSvc isn't running!!!!!!!")
 		}
-
 		//verify if sppsvc is running
 		if (checkservices.Name == "sppsvc"){
 			if (checkservices.State == "Stopped")
 				printit("   !!!!!!!SECURITY WARNING: The service sppsvc isn't running!!!!!!!")
 		}
-
 		//verify if WinDefend is running
 		if (checkservices.Name == "WinDefend"){
 			if (checkservices.State == "Stopped")
@@ -304,7 +302,6 @@ var getpcservices2 = getpcservices();
 printit("\nStartup process check:");
 var startuptasks2 = startuptasks();
 	for(var count = 0;count < startuptasks2.length; count++){
-
 		var onedrivetrue; 
 		var checkprocess = startuptasks2[count];
 
