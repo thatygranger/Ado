@@ -33,14 +33,14 @@ var tipoeq = function (){
 
 	var myComputer = ".";
 	
+	//obtem objeto que representa o servico WMI da máquina	
 	var objWMIService = GetObject( "winmgmts:\\\\" + myComputer + "\\root\\cimv2" );
-	
+	//obtem informações da bateria da maquina
 	var colItems = objWMIService.ExecQuery( "Select * from Win32_Battery" );
-	
 	var IsLaptop = false;
-	
 	var objItem = new Enumerator(colItems);
 	
+	//verifica se existe alguma informação sobre a bateria do equipamento, se sim, IsLaptop = true
 		for (;!objItem.atEnd();objItem.moveNext()) {
 			IsLaptop = true;
 		}
@@ -49,7 +49,7 @@ var tipoeq = function (){
 			WScript.Echo ("O equipamento eh laptop");
 		else
 			WScript.Echo ("O equipamento eh desktop");
-	         */		
+	         */	
 	return IsLaptop;
 }
 
@@ -59,25 +59,30 @@ var tipoeq = function (){
 
 var qtdmemoria = function (){
 
+	//obtem objeto que representa o servico WMI da máquina	
 	var objWMIService = GetObject( "winmgmts://./root/cimv2" );
+	//obtem informações do sistema da maquina
 	var colItems = objWMIService.ExecQuery( "Select * from Win32_ComputerSystem", null , 48 );
 	var colProps = new Enumerator(colItems);
 	var pcName;
-	
+	//busca na lista de informações do sistema o nome da maquina e armazena na variavel 'pcName'
 		for ( ; !colProps.atEnd(); colProps.moveNext()) { 
 			p = colProps.item();
 			pcName = p.name;
 		}
-	
+	//obtem informações sobre a memória física da maquina
 	var colItems = objWMIService.ExecQuery("Select * from Win32_PhysicalMemory",null,48);
 	var colProps = new Enumerator(colItems);
 	var totalMemory = 0;
-	
+		//verifica a quantidade de memória fisica da maquina
 		for ( ; !colProps.atEnd(); colProps.moveNext()) { 
 			p = colProps.item();
+			//converte o valor para megabytes
 			totalMemory += ( p.Capacity/1048576 );
 		}
+	//imprime o total de memória fisica instalada na maquina
 	WScript.Echo ("memoria total: "+totalMemory+" mb");
+//retorna o total de memória fisica
 return totalMemory;
 }
 
@@ -86,19 +91,21 @@ return totalMemory;
 //Função 5 Serviços rodando na máquina
 
 var servicos = function (){
+//obtem objeto que representa o servico WMI da máquina	
 var objWMIService = GetObject( "winmgmts://./root/cimv2" );
-
+//obtem a lista de serviços instalados no sistema
 var colItems = objWMIService.ExecQuery("Select * from Win32_Service	",null,48);
 var colProps = new Enumerator(colItems);
+//variavel para armazenar a lista de serviços
 var serviceArray = new Array ();
-
+//le a lista de serviços e armazena na variavel
 for ( ; !colProps.atEnd(); colProps.moveNext()) { 
 	p = colProps.item();
 	var obj = new Object ();
 	serviceArray.push (p);
 }
 
-
+//le cada elemento da variavel array e imprime as informações do serviço
 for (var i = 0; i< serviceArray.length; i+=1) {
 	var service = serviceArray[i];
 	//WScript.Echo ("nome: "+service.Name );
@@ -106,6 +113,7 @@ for (var i = 0; i< serviceArray.length; i+=1) {
 	//WScript.Echo ("status: "+service.State  );
 	//WScript.Echo  ();
 }
+//retorna o array de serviços
 return serviceArray;
 }
 
@@ -113,23 +121,26 @@ return serviceArray;
 //Função 7 serviços iniciados com o S.O
 
 var processo = function (){
+//obtem objeto que representa o servico WMI da máquina
 var objWMIService = GetObject( "winmgmts://./root/cimv2" );
-
+//obtem informações sobre os processos na lista inicialização
 var colItems = objWMIService.ExecQuery("Select * from Win32_StartupCommand	",null,48);
 var colProps = new Enumerator(colItems);
+//variavel para armazenar a lista de processos
 var processArray = new Array ();
-
+//le a lista de processos e armazena na variavel
 for ( ; !colProps.atEnd(); colProps.moveNext()) { 
 	p = colProps.item();
 	var obj = new Object ();
 	processArray.push (p);
 }
 
-
+//le cada elemento da variavel array e imprime as o nome dos processos
 for (var i = 0; i< processArray.length; i+=1) {
 	var process = processArray[i];
 	//WScript.Echo ("nome: "+process.Name );
 }
+//retorna o array de processos
 return processArray;
 }
 
